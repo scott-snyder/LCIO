@@ -1,5 +1,5 @@
 Bottom: 66f8e572fa074b0d9152e5218a427c50c7930335
-Top:    66f8e572fa074b0d9152e5218a427c50c7930335
+Top:    723b78096cd64092512c8774cb715d427810e817
 Author: scott snyder <sss@karma>
 Date:   2020-01-31 18:58:35 -0500
 
@@ -9,4 +9,17 @@ gitignore
 
 ---
 
-
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+index 00000000..a39f1afd
+--- /dev/null
++++ b/.gitignore
+@@ -0,0 +1,8 @@
++config/lcio.properties
++doc/lcio.xml
++doc/index.html
++pom.xml
++src/aid/EVENT/LCIO.aid
++src/cpp/include/lcio.h
++src/cpp/include/pre-generated/EVENT/LCIO.h
++src/latex/manual/manual.tex
