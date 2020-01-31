@@ -1,0 +1,9 @@
+*~
+config/lcio.properties
+doc/lcio.xml
+doc/index.html
+pom.xml
+src/aid/EVENT/LCIO.aid
+src/cpp/include/lcio.h
+src/cpp/include/pre-generated/EVENT/LCIO.h
+src/latex/manual/manual.tex
