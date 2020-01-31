@@ -1,5 +1,5 @@
 Bottom: 723b78096cd64092512c8774cb715d427810e817
-Top:    723b78096cd64092512c8774cb715d427810e817
+Top:    38129e3e1131acb31c8e2b99d188386d878e363f
 Author: scott snyder <sss@karma>
 Date:   2020-01-31 18:59:32 -0500
 
@@ -8,4 +8,33 @@ support compiling with c++17.
 
 ---
 
-
+diff --git a/cmake/ilcsoft_default_cxx_flags.cmake b/cmake/ilcsoft_default_cxx_flags.cmake
+index 06ad63fe..5382a3f6 100644
+--- a/cmake/ilcsoft_default_cxx_flags.cmake
++++ b/cmake/ilcsoft_default_cxx_flags.cmake
+@@ -31,6 +31,17 @@ FOREACH( FLAG ${COMPILER_FLAGS} )
+ ENDFOREACH()
+ 
+ OPTION( USE_CXX11 "Use CXX Standard 2011" True )
++OPTION( USE_CXX17 "Use CXX Standard 2017" False )
++IF( USE_CXX17 )
++  SET( FLAG "-std=c++17" )
++  SET( FLAG_WORD "stdCXX17" )
++  CHECK_CXX_COMPILER_FLAG( ${FLAG} CXX_FLAG_WORKS_${FLAG_WORD} )
++  IF( ${CXX_FLAG_WORKS_${FLAG_WORD}} )
++    SET( CMAKE_CXX_FLAGS "${FLAG} ${CMAKE_CXX_FLAGS}")
++  ELSE()
++    MESSAGE( FATAL_ERROR "Cannot add ${FLAG} to CMAKE_CXX_FLAGS, but c++11 was requested, check your compiler" )
++  ENDIF()
++ELSE()
+ IF( USE_CXX11 )
+   SET( FLAG "-std=c++11" )
+   SET( FLAG_WORD "stdCXX11" )
+@@ -43,6 +54,7 @@ IF( USE_CXX11 )
+ ELSE()
+   MESSAGE( STATUS "NOT building with CXX11 standard" )
+ ENDIF()
++ENDIF()
+ 
+ IF( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 4.9 )
+   SET( CMAKE_CXX_FLAGS "-fdiagnostics-color=auto ${CMAKE_CXX_FLAGS}" )
