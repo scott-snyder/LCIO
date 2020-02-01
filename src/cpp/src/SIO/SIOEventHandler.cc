@@ -112,7 +112,7 @@ namespace SIO  {
 	    (*_evtP)->addCollection( new LCCollectionIOVec( colType ) , colName) ; 
 	  
 	}
-	catch( EventException ){  return LCIO::ERROR ; }
+	catch( const EventException& ){  return LCIO::ERROR ; }
 
       }
 

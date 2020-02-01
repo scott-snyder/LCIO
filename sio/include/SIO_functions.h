@@ -88,11 +88,11 @@
 //
 // Take the drudgery out of error handling.
 //
-#define SIO_DATA( rec, pnt, cnt ) status = SIO_functions::data( (rec), (pnt), (cnt) ); if( !(status & 1) ) return status;
+#define SIO_DATA( rec, pnt, cnt ) do { status = SIO_functions::data( (rec), (pnt), (cnt) ); if( !(status & 1) ) return status; } while(0)
 
-#define SIO_PNTR( rec, pnt )   status = SIO_functions::pointer_to( (rec), (SIO_POINTER_DECL *)(pnt) );   if( !(status & 1) )       return status;
+#define SIO_PNTR( rec, pnt )   do { status = SIO_functions::pointer_to( (rec), (SIO_POINTER_DECL *)(pnt) );   if( !(status & 1) )       return status; } while(0)
 
-#define SIO_PTAG( rec, pnt )   status = SIO_functions::pointed_at( (rec), (SIO_POINTER_DECL *)(pnt) );   if( !(status & 1) )       return status;
+#define SIO_PTAG( rec, pnt )   do { status = SIO_functions::pointed_at( (rec), (SIO_POINTER_DECL *)(pnt) );   if( !(status & 1) )       return status; } while(0)
 
 //
 // This turns up far too often to be ignored.
