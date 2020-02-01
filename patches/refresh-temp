@@ -1,0 +1,196 @@
+Bottom: 7299bbb935b6cf18f193dd1f94152894b929ad5a
+Top:    eeca2263203bf03bb768bebbc733320b6da6fd87
+Author: scott snyder <sss@karma>
+Date:   2020-01-31 19:00:34 -0500
+
+Refresh of warn
+
+---
+
+diff --git a/sio/include/SIO_functions.h b/sio/include/SIO_functions.h
+index 81a22cd0..a5163c38 100644
+--- a/sio/include/SIO_functions.h
++++ b/sio/include/SIO_functions.h
+@@ -88,11 +88,11 @@
+ //
+ // Take the drudgery out of error handling.
+ //
+-#define SIO_DATA( rec, pnt, cnt ) status = SIO_functions::data( (rec), (pnt), (cnt) ); if( !(status & 1) ) return status;
++#define SIO_DATA( rec, pnt, cnt ) do { status = SIO_functions::data( (rec), (pnt), (cnt) ); if( !(status & 1) ) return status; } while(0)
+ 
+-#define SIO_PNTR( rec, pnt )   status = SIO_functions::pointer_to( (rec), (SIO_POINTER_DECL *)(pnt) );   if( !(status & 1) )       return status;
++#define SIO_PNTR( rec, pnt )   do { status = SIO_functions::pointer_to( (rec), (SIO_POINTER_DECL *)(pnt) );   if( !(status & 1) )       return status; } while(0)
+ 
+-#define SIO_PTAG( rec, pnt )   status = SIO_functions::pointed_at( (rec), (SIO_POINTER_DECL *)(pnt) );   if( !(status & 1) )       return status;
++#define SIO_PTAG( rec, pnt )   do { status = SIO_functions::pointed_at( (rec), (SIO_POINTER_DECL *)(pnt) );   if( !(status & 1) )       return status; } while(0)
+ 
+ //
+ // This turns up far too often to be ignored.
+diff --git a/src/cpp/include/CPPFORT/cfortran.h b/src/cpp/include/CPPFORT/cfortran.h
+index ed23011d..ed6daebc 100644
+--- a/src/cpp/include/CPPFORT/cfortran.h
++++ b/src/cpp/include/CPPFORT/cfortran.h
+@@ -434,7 +434,9 @@ static char *f2cstrv(char *fstr, char* cstr, int elem_len, int sizeofcstr)
+ static char *f2cstrv(      fstr,       cstr,     elem_len,     sizeofcstr)
+                      char *fstr; char* cstr; int elem_len; int sizeofcstr; 
+ #endif
+-{ int i,j;
++{
++#if 0
++  int i,j;
+ /* elem_len includes \0 for C strings. Fortran strings don't have term. \0.
+    Useful size of string must be the same in both languages. */
+ cstr += sizeofcstr;
+@@ -442,7 +444,18 @@ fstr += sizeofcstr - sizeofcstr/elem_len;
+ for (i=0; i<sizeofcstr/elem_len; i++) {
+   *--cstr = '\0';
+   for (j=1; j<elem_len; j++) *--cstr = *--fstr;
+-} return cstr; }
++} return cstr;
++#endif
++  char* cstr_in = cstr;
++  size_t nstring = sizeofcstr / elem_len;
++  for (size_t i = 0; i < nstring; i++) {
++    memcpy (cstr, fstr, elem_len-1);
++    cstr[elem_len-1] = '\0';
++    cstr += elem_len;
++    fstr += elem_len-1;
++  }
++  return cstr_in;
++}
+ 
+ /* kill the trailing char t's in string s. */
+ #ifndef __CF__KnR
+diff --git a/src/cpp/include/SIO/LCSIO.h b/src/cpp/include/SIO/LCSIO.h
+index e7f250ac..55d54ac3 100644
+--- a/src/cpp/include/SIO/LCSIO.h
++++ b/src/cpp/include/SIO/LCSIO.h
+@@ -85,10 +85,10 @@ namespace SIO {
+   } ;
+ 
+ 
+-#define LCSIO_READ( rec, pnt ) status = LCSIO::read( (rec), (pnt)  ); if( !(status & 1) ) return status;
+-#define LCSIO_READ_LEN( rec, pnt , len ) status = LCSIO::read( (rec), (pnt) , (len)  ); if( !(status & 1) ) return status;
++#define LCSIO_READ( rec, pnt ) do {status = LCSIO::read( (rec), (pnt)  ); if( !(status & 1) ) return status; } while(0)
++#define LCSIO_READ_LEN( rec, pnt , len ) do { status = LCSIO::read( (rec), (pnt) , (len)  ); if( !(status & 1) ) return status; } while(0)
+ 
+-#define LCSIO_WRITE( rec, pnt ) status = LCSIO::write( (rec), (pnt)  ); if( !(status & 1) ) return status;
++#define LCSIO_WRITE( rec, pnt ) do { status = LCSIO::write( (rec), (pnt)  ); if( !(status & 1) ) return status; } while(0)
+ 
+ /** Collection of static helper  functions for reading and writing
+  * data with SIO. Could go to the SIO_functions class.
+diff --git a/src/cpp/src/IMPL/SimCalorimeterHitImpl.cc b/src/cpp/src/IMPL/SimCalorimeterHitImpl.cc
+index 3010b390..b9061d4a 100644
+--- a/src/cpp/src/IMPL/SimCalorimeterHitImpl.cc
++++ b/src/cpp/src/IMPL/SimCalorimeterHitImpl.cc
+@@ -101,7 +101,7 @@ namespace IMPL{
+   EVENT::MCParticle * SimCalorimeterHitImpl::getParticleCont(int i) const {
+     try{
+       return _vec.at(i)->Particle ;
+-    }catch( std::out_of_range ){
++    }catch( const std::out_of_range& ){
+       std::stringstream err ; err << "SimCalorimeterHitImpl::getParticleCont(): out_of_range :"  << i  ;
+       throw EVENT::Exception( err.str() );
+     }
+diff --git a/src/cpp/src/SIO/SIOEventHandler.cc b/src/cpp/src/SIO/SIOEventHandler.cc
+index b7c434ed..3bb67699 100644
+--- a/src/cpp/src/SIO/SIOEventHandler.cc
++++ b/src/cpp/src/SIO/SIOEventHandler.cc
+@@ -112,7 +112,7 @@ namespace SIO  {
+ 	    (*_evtP)->addCollection( new LCCollectionIOVec( colType ) , colName) ; 
+ 	  
+ 	}
+-	catch( EventException ){  return LCIO::ERROR ; }
++	catch( const EventException& ){  return LCIO::ERROR ; }
+ 
+       }
+ 
+diff --git a/src/cpp/src/SIO/SIOReader.cc b/src/cpp/src/SIO/SIOReader.cc
+index e872e767..83ba18b2 100644
+--- a/src/cpp/src/SIO/SIOReader.cc
++++ b/src/cpp/src/SIO/SIOReader.cc
+@@ -315,7 +315,7 @@ namespace SIO {
+     try{ 
+       readRecord() ;
+     }
+-    catch(EndOfDataException){
++    catch(const EndOfDataException&){
+       return 0 ;
+     }
+     
+@@ -395,7 +395,7 @@ namespace SIO {
+       try{ 
+ 	readRecord() ;
+       }
+-      catch(EndOfDataException){
++      catch(const EndOfDataException&){
+ 	return 0 ;
+       }
+       
+@@ -408,7 +408,7 @@ namespace SIO {
+       try{ 
+ 	readRecord() ;
+       }
+-      catch(EndOfDataException){
++      catch(const EndOfDataException&){
+ 	return 0 ;
+       }
+       
+@@ -454,7 +454,7 @@ namespace SIO {
+ 	readRecord() ;
+ 
+       }
+-      catch(EndOfDataException){
++      catch(const EndOfDataException&){
+ 
+ 	return ;
+       }
+@@ -468,7 +468,7 @@ namespace SIO {
+     try{ 
+       readRecord() ;
+     }
+-    catch(EndOfDataException){
++    catch(const EndOfDataException&){
+       return ;
+     }
+     
+@@ -586,7 +586,7 @@ namespace SIO {
+ 	  try{ 
+ 	    readRecord() ;
+ 	  }
+-	  catch(EndOfDataException){
++	  catch(const EndOfDataException&){
+ 	    return 0 ;
+ 	  }
+ 	  
+@@ -602,7 +602,7 @@ namespace SIO {
+ 	try{ 
+ 	  readRecord() ;
+ 	}
+-	catch(EndOfDataException){
++	catch(const EndOfDataException&){
+ 	  return 0 ;
+ 	}
+ 	
+@@ -680,7 +680,7 @@ namespace SIO {
+       try{ 
+ 	readRecord() ;
+       }
+-      catch(EndOfDataException){
++      catch(const EndOfDataException&){
+ 	
+ 	// only throw exception if a 'finite' number of records was 
+ 	// specified that couldn't be read from the file
+diff --git a/src/cpp/src/UTIL/lXDR.cc b/src/cpp/src/UTIL/lXDR.cc
+index a7816b43..8068a880 100644
+--- a/src/cpp/src/UTIL/lXDR.cc
++++ b/src/cpp/src/UTIL/lXDR.cc
+@@ -75,7 +75,7 @@ void lXDR::setFileName(const char *filename, bool open_for_write)
+ 
+    int n = strlen(filename);
+    _fileName = new char [n + 1];
+-   strncpy(_fileName, filename, n);
++   strncpy(_fileName, filename, n+1);
+    _fileName[n] = '\0';
+ 
+    _openForWrite = open_for_write;
