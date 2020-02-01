@@ -1,3 +1,6 @@
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
 
 #include "CPPFORT/lcobv.h"
 #include "UTIL/LCRelationNavigator.h"
