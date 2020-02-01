@@ -1,8 +1,9 @@
 Version: 1
-Previous: 2b6b08cf10837279f15263a5279a8d7275644744
-Head: ae5bec7863658633e212beb5557e57ed28341b7e
+Previous: d458440fd91b7d0eb133af21adae533145b00528
+Head: c7f1e7e6d7b63efab2f5f8936bc1416a598bf7ff
 Applied:
   gitignore: ef460601a5b9eb3515cdf7027ee33ad8aec0abf6
   cxx17: ae5bec7863658633e212beb5557e57ed28341b7e
+  warn: c7f1e7e6d7b63efab2f5f8936bc1416a598bf7ff
 Unapplied:
 Hidden:
