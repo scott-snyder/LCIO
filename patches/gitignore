@@ -1,5 +1,5 @@
 Bottom: 66f8e572fa074b0d9152e5218a427c50c7930335
-Top:    723b78096cd64092512c8774cb715d427810e817
+Top:    f2698903adcafc9d24d643a5a1683d404a043b57
 Author: scott snyder <sss@karma>
 Date:   2020-01-31 18:58:35 -0500
 
@@ -11,10 +11,11 @@ gitignore
 
 diff --git a/.gitignore b/.gitignore
 new file mode 100644
-index 00000000..a39f1afd
+index 00000000..42f304ef
 --- /dev/null
 +++ b/.gitignore
-@@ -0,0 +1,8 @@
+@@ -0,0 +1,9 @@
++*~
 +config/lcio.properties
 +doc/lcio.xml
 +doc/index.html
