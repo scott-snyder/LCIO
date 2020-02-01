@@ -315,7 +315,7 @@ namespace SIO {
     try{ 
       readRecord() ;
     }
-    catch(EndOfDataException){
+    catch(const EndOfDataException&){
       return 0 ;
     }
     
@@ -395,7 +395,7 @@ namespace SIO {
       try{ 
 	readRecord() ;
       }
-      catch(EndOfDataException){
+      catch(const EndOfDataException&){
 	return 0 ;
       }
       
@@ -408,7 +408,7 @@ namespace SIO {
       try{ 
 	readRecord() ;
       }
-      catch(EndOfDataException){
+      catch(const EndOfDataException&){
 	return 0 ;
       }
       
@@ -454,7 +454,7 @@ namespace SIO {
 	readRecord() ;
 
       }
-      catch(EndOfDataException){
+      catch(const EndOfDataException&){
 
 	return ;
       }
@@ -468,7 +468,7 @@ namespace SIO {
     try{ 
       readRecord() ;
     }
-    catch(EndOfDataException){
+    catch(const EndOfDataException&){
       return ;
     }
     
@@ -586,7 +586,7 @@ namespace SIO {
 	  try{ 
 	    readRecord() ;
 	  }
-	  catch(EndOfDataException){
+	  catch(const EndOfDataException&){
 	    return 0 ;
 	  }
 	  
@@ -602,7 +602,7 @@ namespace SIO {
 	try{ 
 	  readRecord() ;
 	}
-	catch(EndOfDataException){
+	catch(const EndOfDataException&){
 	  return 0 ;
 	}
 	
@@ -680,7 +680,7 @@ namespace SIO {
       try{ 
 	readRecord() ;
       }
-      catch(EndOfDataException){
+      catch(const EndOfDataException&){
 	
 	// only throw exception if a 'finite' number of records was 
 	// specified that couldn't be read from the file

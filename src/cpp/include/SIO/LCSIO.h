@@ -85,10 +85,10 @@ namespace SIO {
   } ;
 
 
-#define LCSIO_READ( rec, pnt ) status = LCSIO::read( (rec), (pnt)  ); if( !(status & 1) ) return status;
-#define LCSIO_READ_LEN( rec, pnt , len ) status = LCSIO::read( (rec), (pnt) , (len)  ); if( !(status & 1) ) return status;
+#define LCSIO_READ( rec, pnt ) do {status = LCSIO::read( (rec), (pnt)  ); if( !(status & 1) ) return status; } while(0)
+#define LCSIO_READ_LEN( rec, pnt , len ) do { status = LCSIO::read( (rec), (pnt) , (len)  ); if( !(status & 1) ) return status; } while(0)
 
-#define LCSIO_WRITE( rec, pnt ) status = LCSIO::write( (rec), (pnt)  ); if( !(status & 1) ) return status;
+#define LCSIO_WRITE( rec, pnt ) do { status = LCSIO::write( (rec), (pnt)  ); if( !(status & 1) ) return status; } while(0)
 
 /** Collection of static helper  functions for reading and writing
  * data with SIO. Could go to the SIO_functions class.
