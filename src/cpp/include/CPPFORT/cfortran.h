@@ -434,7 +434,9 @@ static char *f2cstrv(char *fstr, char* cstr, int elem_len, int sizeofcstr)
 static char *f2cstrv(      fstr,       cstr,     elem_len,     sizeofcstr)
                      char *fstr; char* cstr; int elem_len; int sizeofcstr; 
 #endif
-{ int i,j;
+{
+#if 0
+  int i,j;
 /* elem_len includes \0 for C strings. Fortran strings don't have term. \0.
    Useful size of string must be the same in both languages. */
 cstr += sizeofcstr;
@@ -442,7 +444,18 @@ fstr += sizeofcstr - sizeofcstr/elem_len;
 for (i=0; i<sizeofcstr/elem_len; i++) {
   *--cstr = '\0';
   for (j=1; j<elem_len; j++) *--cstr = *--fstr;
-} return cstr; }
+} return cstr;
+#endif
+  char* cstr_in = cstr;
+  size_t nstring = sizeofcstr / elem_len;
+  for (size_t i = 0; i < nstring; i++) {
+    memcpy (cstr, fstr, elem_len-1);
+    cstr[elem_len-1] = '\0';
+    cstr += elem_len;
+    fstr += elem_len-1;
+  }
+  return cstr_in;
+}
 
 /* kill the trailing char t's in string s. */
 #ifndef __CF__KnR
