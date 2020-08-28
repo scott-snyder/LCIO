@@ -1,0 +1,6 @@
+Bottom: 7a61bc5d9942a9585bd16d8c744bc1cc282bf89b
+Top:    7a61bc5d9942a9585bd16d8c744bc1cc282bf89b
+Author: scott snyder <sss@karma>
+Date:   2020-01-31 18:59:32 -0500
+
+support compiling with c++17.
