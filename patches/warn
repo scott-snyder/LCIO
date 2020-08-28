@@ -1,0 +1,6 @@
+Bottom: 7a61bc5d9942a9585bd16d8c744bc1cc282bf89b
+Top:    7a61bc5d9942a9585bd16d8c744bc1cc282bf89b
+Author: scott snyder <sss@karma>
+Date:   2020-01-31 19:00:27 -0500
+
+Fix compilation warnings.
