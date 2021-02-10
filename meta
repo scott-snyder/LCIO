@@ -1,9 +1,9 @@
 Version: 1
-Previous: db363b828385886f9f7b0e3d9d59a89aeb16746e
-Head: 8f9e86b93b7d5d83221fabb872ed7e82f1638476
+Previous: a86a38ee1e03195ab6df8e14677aab1475e250db
+Head: 7bddcb9bac24da03ddcccd30c0eb2a2afd22ef18
 Applied:
+  gitignore: 144dd157432bd97cdef8f12abe2b35222888c2b7
+  warn: e79427a649dcbd7beec6f4e062612aa9723b9df2
+  rootcint: 7bddcb9bac24da03ddcccd30c0eb2a2afd22ef18
 Unapplied:
-  gitignore: 5d648d108c65f370698116aef5ba650f41fde667
-  warn: bf38e673d7bb44e1f8571e7d244f7f82927e1880
-  rootcint: 1f53d2c4b8f5b9661cbe91ba59a88f800e23e06d
 Hidden:
