@@ -1,3 +1,7 @@
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
+
 #include "CPPFORT/lcvec.h"
 #include "EVENT/LCIntVec.h"
 #include "EVENT/LCFloatVec.h"

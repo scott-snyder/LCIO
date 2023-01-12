@@ -1,3 +1,7 @@
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
+
 #include "CPPFORT/lciof77apiext.h"
 
 #include "lcio.h" 

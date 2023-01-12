@@ -1,3 +1,7 @@
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
+
 #include "CPPFORT/lcrhd.h"
 
 #include "lcio.h" 
