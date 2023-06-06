@@ -170,8 +170,8 @@ LCWarning::~LCWarning(){
 // singleton
 LCWarning& LCWarning::getInstance()
 {
-  static LCWarning instance;
-  return instance;
+  static LCWarning linstance;
+  return linstance;
 }
 
 
