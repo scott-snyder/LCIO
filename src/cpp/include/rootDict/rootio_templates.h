@@ -47,9 +47,9 @@
 
 #ifdef __MAKECINT__
 
-#pragma link C++ class std::vector<std::string>+;
-#pragma link C++ class std::vector<int>+;
-#pragma link C++ class std::vector<float>+;
+//#pragma link C++ class std::vector<std::string>+;
+//#pragma link C++ class std::vector<int>+;
+//#pragma link C++ class std::vector<float>+;
 
 #pragma link C++ class std::map<std::string,EVENT::LCCollection*>+;
 #pragma link C++ class std::pair<std::string,EVENT::LCCollection*>+;
