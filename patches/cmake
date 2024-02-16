@@ -1,6 +1,0 @@
-Bottom: 8d987a925225e35a6e545cf01a63e75812b91fb5
-Top:    8d987a925225e35a6e545cf01a63e75812b91fb5
-Author: scott snyder <sss@karma>
-Date:   2023-12-01 20:27:24 -0500
-
-Fix location that we look for SIOTargets.cmake.
