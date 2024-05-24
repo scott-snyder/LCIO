@@ -29,7 +29,8 @@ namespace IOIMPL {
   //----------------------------------------------------------------------------
   
   void LCEventLazyImpl::removeCollection(const std::string & name) {
-    std::remove_if( _blocks.begin(), _blocks.end(), [&]( const sio::block_ptr &blk ){ return (blk->name() == name) ; } ) ;
+    auto it = std::remove_if( _blocks.begin(), _blocks.end(), [&]( const sio::block_ptr &blk ){ return (blk->name() == name) ; } ) ;
+    _blocks.erase (it, _blocks.end());
     LCEventImpl::removeCollection( name ) ;
   }
   
