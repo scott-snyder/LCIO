@@ -1,10 +1,9 @@
 {
   "version": 5,
-  "prev": "e27bdc3085df792d3238cbc560141700aa76bd00",
-  "head": "842507dbcf9b4ab5c6d232dc262a3f2093366592",
+  "prev": "8dd5d45c7dea6f71d52148965087c3e5516d5416",
+  "head": "480510e4f8e0a9c7b57a2b7cdf3b844269d1bfe3",
   "applied": [
-    "gitignore",
-    "refresh-temp"
+    "gitignore"
   ],
   "unapplied": [
     "rootcintwarn",
@@ -13,10 +12,7 @@
   "hidden": [],
   "patches": {
     "gitignore": {
-      "oid": "f7db4f72d4ab7f866168821b0f69de3b14c7f66c"
-    },
-    "refresh-temp": {
-      "oid": "842507dbcf9b4ab5c6d232dc262a3f2093366592"
+      "oid": "480510e4f8e0a9c7b57a2b7cdf3b844269d1bfe3"
     },
     "remove_if": {
       "oid": "6b5203b16e8634afe8382503af6801b5bef39706"
