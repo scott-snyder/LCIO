@@ -1,9 +1,0 @@
-Bottom: 301b3148ae9c71f4ec221bc5f81d6dbf98100067
-Top:    301b3148ae9c71f4ec221bc5f81d6dbf98100067
-Author: scott snyder <sss@karma>
-Date:   2024-11-10 21:54:37 -0500
-
-Fix use of remove_if.
-
-Need to actually erase the removed elements from the container.
-Fixes warning seen with gcc14.
