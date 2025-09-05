@@ -195,7 +195,7 @@ MESSAGE( STATUS "Using SIO (${SIO_VERSION})" )
 MESSAGE( STATUS "SIO library: ${SIO_LIBRARIES}" )
 MESSAGE( STATUS "SIO includes: ${SIO_INCLUDE_DIRS}" )
 
-INCLUDE_DIRECTORIES( SYSTEM ${SIO_INCLUDE_DIRS} )
+INCLUDE_DIRECTORIES( ${SIO_INCLUDE_DIRS} )
 
 FIND_PACKAGE( Threads REQUIRED )
 
@@ -341,3 +341,8 @@ install(EXPORT ${PROJECT_NAME}Targets
   DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}/"
   )
 
+# By default, the generated Target file will set up the include paths for
+# our libraries using INTERFACE_INCLUDE_DIRECTORIES, meaning that they
+# will be included using -isystem rather than -I.  However, this can hide
+# warnings.  Adjust the behavior to use -I instead.
+set_target_properties(lcio PROPERTIES EXPORT_NO_SYSTEM ON)
