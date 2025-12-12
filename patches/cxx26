@@ -1,0 +1,6 @@
+Bottom: 5b23572357381909b9caa396cc93e4284b203978
+Top:    5b23572357381909b9caa396cc93e4284b203978
+Author: sss <sss@karma>
+Date:   2025-12-12 16:07:35 -0500
+
+Enable compilation with C++26.
