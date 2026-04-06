@@ -496,6 +496,8 @@ namespace lcrtrel{
     typedef std::map<ext_index, ext_type>     ext_map ;
     
   public:
+    virtual ~LCRTRelations() = default;
+
     /** Provides access to an extension object - the type and ownership is defined 
      *  by the class V which should be a subtype of LCExtension, LCOwnedExtension,
      *  LCExtensionVector, LCExtensionList,...
