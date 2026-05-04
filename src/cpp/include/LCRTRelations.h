@@ -497,6 +497,8 @@ namespace lcrtrel{
     
   public:
     virtual ~LCRTRelations() = default;
+    LCRTRelations() = default;
+    LCRTRelations(const LCRTRelations&) = default;
 
     /** Provides access to an extension object - the type and ownership is defined 
      *  by the class V which should be a subtype of LCExtension, LCOwnedExtension,
