@@ -1,0 +1,8 @@
+Bottom: bb355cf1f35277a410a2cd775e58aeae569c4661
+Top:    bb355cf1f35277a410a2cd775e58aeae569c4661
+Author: sss <sss@karma>
+Date:   2026-05-04 13:58:32 -0400
+
+Fix warnings seen compiling with clang.
+
+Implicitly-defined copy ctor.
