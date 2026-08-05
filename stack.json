@@ -1,9 +1,8 @@
 {
   "version": 5,
-  "prev": "ad4785aba052bbce0f54e08c14d18f58ed5a5a61",
-  "head": "6953dccbadf0e27739a95222a599b5b10ef761d6",
-  "applied": [],
-  "unapplied": [
+  "prev": "b1d7461bd93ebc2590b84fbc5e7fc86d6220df7f",
+  "head": "c5062d3fcad0c3185828cdace8eed87fd978e9c8",
+  "applied": [
     "gitignore",
     "rootcintwarn",
     "nosystem",
@@ -11,25 +10,26 @@
     "effc",
     "clang"
   ],
+  "unapplied": [],
   "hidden": [],
   "patches": {
     "clang": {
-      "oid": "b7b5cac0baa15161a1c0dffd6bfcbfd9bffb4950"
+      "oid": "c5062d3fcad0c3185828cdace8eed87fd978e9c8"
     },
     "cxx26": {
-      "oid": "48d9ace2bcf881c74ed51592de0e45ff71a95f45"
+      "oid": "ded69dd06e51074a380ef7d5a4dbce5aa28d742b"
     },
     "effc": {
-      "oid": "27978f58ccc94e5de6dadaeea38ece9a47d1dfd2"
+      "oid": "d31be261228f39a45466793c75f378a5fbd3db04"
     },
     "gitignore": {
-      "oid": "24d125958899ee16e026a5c39fe6bff8fa362815"
+      "oid": "3ceb732ac258704eb05574fc1be02c60b30f1a31"
     },
     "nosystem": {
-      "oid": "9aaa2c4a183d81b37db93738e097efeaab633e38"
+      "oid": "77eeb1fa8081728b3139dd137e2253f8d0b30958"
     },
     "rootcintwarn": {
-      "oid": "ec992c5fbd6c9c15705d3d9cf310993f309bc0c0"
+      "oid": "2f0987c8453c4da52df8d8930e04483c756f0b9c"
     }
   }
 }
